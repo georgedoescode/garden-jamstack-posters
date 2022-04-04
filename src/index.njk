@@ -1,0 +1,49 @@
+---
+eleventyComputed:
+  title: "{{ site.title }}"
+description: A peculiar little website that will create a generative poster design every day until the summer solstice.
+layout: base-layout.njk
+---
+
+<img class="background-splodges" src="/background-splodges.svg" alt="" />
+
+<header class="home-header">
+  <div class="home-header__text">
+    <h1>“Garden” — <br/> Generative Posters</h1>
+    <p>
+      Hey! Welcome to Garden — a peculiar little website that will create a generative poster design every day until the summer solstice. 
+      It runs on Eleventy + Netlify + Puppeteer and <strong>ships 0 lines of JavaScript.</strong>
+    </p>
+    <a href="/">
+      Browse the repository on GitHub!
+    </a>
+  </div>
+  <div class="home-header__flower">
+    {% include 'flower.njk' %}
+  </div>
+</header>
+
+<main>
+  <ul class="posters">
+    <li class="posters__info-card posters-next">
+      <div class="posters__info-card-inner">
+        <p>Next — {{ site.tomorrowsDateText }}</p>
+      </div>
+    </li>
+    {% for poster in posters %}
+      <li class="posters__generation">
+        <a href="/generations/{{ poster.seed }}/">
+          <img 
+            src="/generations/{{ poster.seed }}/poster.svg" 
+            alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
+            loading="lazy"
+          />
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</main>
+
+<footer class="home-footer">
+  <p>Made by <a href="https://twitter.com/georgedoescode" target="_blank">George Francis</a></p>
+</footer>

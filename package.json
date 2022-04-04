@@ -1,0 +1,36 @@
+{
+  "name": "garden-posters",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npm-run-all --parallel start:*",
+    "start:eleventy": "eleventy --serve --port=8081",
+    "build": "eleventy ; node functions/generate-social-images.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@georgedoescode/generative-utils": "^1.0.38",
+    "@georgedoescode/vector2d": "^1.0.7",
+    "@svgdotjs/svg.js": "^3.1.2",
+    "bezier-js": "^6.1.0",
+    "chrome-aws-lambda": "^10.1.0",
+    "clean-css": "^5.2.4",
+    "puppeteer-core": "^13.5.1",
+    "stream": "0.0.2",
+    "svg-arc-to-cubic-bezier": "^3.2.0",
+    "svg.js": "^2.7.1",
+    "svgdom": "^0.1.10",
+    "svgo": "^2.8.0",
+    "terser": "^5.12.1"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "dotenv": "^16.0.0",
+    "esbuild": "^0.14.28",
+    "npm-run-all": "^4.1.5",
+    "puppeteer": "^13.5.1"
+  }
+}
