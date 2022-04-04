@@ -6,6 +6,10 @@ require('dotenv').config();
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('./src/fonts');
 
+  eleventyConfig.addPassthroughCopy({
+    './src/img/og-image.png': 'og-image.png',
+  });
+
   eleventyConfig.addPassthroughCopy({ './src/img/favicon.ico': 'favicon.ico' });
   eleventyConfig.addPassthroughCopy({
     './src/img/favicon-16x16.png': 'favicon-16x16.png',
