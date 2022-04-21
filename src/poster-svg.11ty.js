@@ -13,7 +13,7 @@ class PosterSVG {
   }
 
   render(data) {
-    return generatePoster(data.poster.seed);
+    return generatePoster(data.poster.seed, data.tokens.colors);
   }
 }
 

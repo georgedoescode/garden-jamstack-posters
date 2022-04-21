@@ -1,0 +1,149 @@
+/* Poster Page */
+
+html.poster-page {
+  height: -webkit-fill-available;
+}
+
+.poster-page body {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: hidden;
+}
+
+.poster-page {
+  --shadow-color: hsla(0, 100%, 0%, 0.05);
+}
+
+.poster-page__header {
+  position: absolute;
+  top: var(--base-spacing);
+  left: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content 1fr var(--space-l);
+  place-items: center;
+  padding: 0 var(--base-spacing);
+}
+
+.poster-page__header .spinning-flower {
+  grid-row: 1;
+  grid-column: 3;
+}
+
+.poster-page__header a {
+  grid-row: 1;
+  grid-column: 1;
+  font-weight: 700;
+  text-decoration-thickness: 0.125rem;
+  color: var(--base-color);
+}
+
+.poster-page main img {
+  aspect-ratio: 3 / 4;
+  width: auto;
+  height: 80vmin;
+  box-shadow: 8px 10px 32px 0px var(--shadow-color);
+  border-radius: var(--border-radius);
+}
+
+.poster-page__footer {
+  position: absolute;
+  width: 100%;
+  display: grid;
+  grid-template-columns: max-content 1fr var(--space-s-m);
+  bottom: var(--base-spacing);
+  left: 0;
+  padding: 0 var(--base-spacing);
+}
+
+.poster-page__footer-stem {
+  height: var(--space-l);
+}
+
+.poster-page__footer a {
+  width: 100%;
+  grid-column: 3;
+  place-self: center;
+}
+
+.poster-page__footer a svg {
+  display: block;
+}
+
+@media only screen and (max-width: 64rem) {
+  .posters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .home-header {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .home-header__text {
+    grid-column: 1 / 5;
+  }
+
+  .home-header__flower {
+    grid-column: 5 / 7;
+  }
+}
+
+@media only screen and (max-width: 48rem) {
+  .homer-header {
+    margin-top: var(--base-spacing);
+    grid-gap: 0;
+  }
+
+  .home-header__flower {
+    position: absolute;
+    top: var(--base-spacing);
+    right: var(--base-spacing);
+    width: var(--space-l);
+  }
+
+  .posters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-header__text {
+    grid-column: -1 / 1;
+    margin-top: calc(var(--space-2xl-3xl));
+  }
+}
+
+@media only screen and (max-width: 24rem) {
+  .posters {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .spinning-flower {
+    will-change: transform;
+    animation: rotate 24s linear infinite;
+  }
+
+  .posters li:not(.posters__info-card) {
+    transition: transform 150ms ease-in-out;
+  }
+
+  .posters li:focus-within {
+    transform: translateY(-1%);
+  }
+
+  .posters li:not(.posters__info-card):hover {
+    transform: translateY(-2%);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}

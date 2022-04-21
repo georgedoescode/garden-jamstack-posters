@@ -13,7 +13,7 @@ const { optimize } = require('svgo');
 const { Glob, Node } = require('./glob');
 const { Bezier } = require('bezier-js');
 
-const dmSansEncoded = require('./dm-sans-encoded');
+const dmSansEncoded = require('../fonts/dm-sans-encoded');
 
 const BASE_SEED = 'Like a circle round the sun';
 
@@ -21,25 +21,14 @@ const background = '#fff';
 
 const colorStore = new Set();
 
-function pickColor() {
-  const colors = [
-    '#132A21',
-    '#132A21',
-    '#132A21',
-    '#132A21',
-    '#479575',
-    '#E2505E',
-    '#EEAFB8',
-    '#F7A546',
-  ];
-
+function pickColor(colors) {
   const choice = random(colors);
   colorStore.add(choice);
 
   return choice;
 }
 
-function createSun(svg, x, y, radius) {
+function createSun(svg, x, y, radius, colors) {
   radius /= 2;
   radius -= 8;
 
@@ -49,7 +38,7 @@ function createSun(svg, x, y, radius) {
 
   const scalar = 1.5;
 
-  const fill = pickColor();
+  const fill = pickColor(colors);
 
   for (let i = 0; i < numPoints; i++) {
     const angle = i * angleStep;
@@ -96,7 +85,7 @@ function createSun(svg, x, y, radius) {
     .fill(background);
 }
 
-function createStem(svg, x, y, width, height) {
+function createStem(svg, x, y, width, height, colors) {
   const dir1 = randomSnap(-width / 2, width / 2, width / 2);
   const size = height;
 
@@ -134,7 +123,7 @@ function createStem(svg, x, y, width, height) {
     pathString += drawCurve(outline.curves[i]);
   }
 
-  const fill = pickColor();
+  const fill = pickColor(colors);
 
   svg.path(pathString).fill(fill);
 
@@ -155,7 +144,7 @@ function createStem(svg, x, y, width, height) {
   }
 }
 
-function createFlower(svg, x, y, size) {
+function createFlower(svg, x, y, size, colors) {
   size /= 2;
 
   const centerRadius = size / 5;
@@ -175,7 +164,7 @@ function createFlower(svg, x, y, size) {
 
   const outlineFlowers = random(0, 1) > 0.5;
 
-  const fill = pickColor();
+  const fill = pickColor(colors);
 
   for (let i = 0; i < numPoints; i++) {
     const angle = i * angleStep;
@@ -257,7 +246,7 @@ function round(value, step) {
   return Math.round(value * inv) / inv;
 }
 
-function generatePoster(seed) {
+function generatePoster(seed, colorTokens) {
   const width = 768;
   const height = 1024;
 
@@ -275,6 +264,17 @@ function generatePoster(seed) {
         </style>
     </defs>
   `;
+
+  const colors = [
+    colorTokens.greenDark,
+    colorTokens.greenDark,
+    colorTokens.greenDark,
+    colorTokens.greenDark,
+    colorTokens.greenBase,
+    colorTokens.redBase,
+    colorTokens.pinkBase,
+    colorTokens.yellowBase,
+  ];
 
   const cellFillChance = 0.125;
   const bottomPadding = 128 + 24;
@@ -300,7 +300,8 @@ function generatePoster(seed) {
       svg,
       largestArea.x + largestArea.width / 2,
       largestArea.y + largestArea.height / 2,
-      Math.min(largestArea.width, largestArea.height)
+      Math.min(largestArea.width, largestArea.height),
+      colors
     );
 
     largestArea.taken = true;
@@ -372,7 +373,7 @@ function generatePoster(seed) {
 
     switch (renderChoice) {
       case 'flower':
-        createFlower(svg, cellCenter.x, cellCenter.y, radius);
+        createFlower(svg, cellCenter.x, cellCenter.y, radius, colors);
         break;
       case 'stem':
         createStem(
@@ -380,19 +381,12 @@ function generatePoster(seed) {
           cellCenter.x,
           cell.y + cell.height,
           cell.width,
-          cell.height
+          cell.height,
+          colors
         );
         break;
-      case 'dots':
-        for (let i = 0; i < 100; i++) {
-          svg
-            .circle(4)
-            .cx(random(cell.x, cell.x + cell.width))
-            .cy(random(cell.y, cell.y + cell.height));
-        }
-        break;
       default:
-        const color = pickColor();
+        const color = pickColor(colors);
 
         svg.circle(radius).cx(cellCenter.x).cy(cellCenter.y).fill(color);
 
@@ -402,7 +396,6 @@ function generatePoster(seed) {
             .cx(cellCenter.x)
             .cy(cellCenter.y)
             .fill(background);
-        } else {
         }
         break;
     }

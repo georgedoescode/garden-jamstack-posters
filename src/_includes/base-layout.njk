@@ -1,7 +1,3 @@
-{% set css %}
-  {% include "site.css" %}
-{% endset %}
-
 <!DOCTYPE html>
 <html lang="en" class="{{ page.fileSlug or 'home' }}">
   <head>
@@ -28,9 +24,7 @@
     <meta name="twitter:description" content="{{ description }}" />
     <meta property="og:description" content="{{ description }}" />
     <link rel="stylesheet" href="/fonts/dm-sans/stylesheet.css" />
-    <style>
-      {{ css | cssmin | safe }}
-    </style>
+    <link rel="stylesheet" href="/css/theme.css" />
   </head>
   <body>
     {{ content | safe }}

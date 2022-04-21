@@ -9,7 +9,7 @@ const CURRENT_DATE = [
   0,
 ];
 
-const getDatesBetweenDates = (startDate, endDate) => {
+function getDatesBetweenDates(startDate, endDate) {
   let dates = [];
 
   const theDate = new Date(startDate);
@@ -22,7 +22,7 @@ const getDatesBetweenDates = (startDate, endDate) => {
   dates = [...dates, endDate];
 
   return dates.reverse();
-};
+}
 
 module.exports = function () {
   const dates = getDatesBetweenDates(

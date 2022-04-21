@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "npm-run-all --parallel start:*",
-    "start:eleventy": "eleventy --serve --port=8081",
+    "dev": "eleventy --serve --port=8081",
     "build": "eleventy ; node functions/generate-social-images.js"
   },
   "keywords": [],
