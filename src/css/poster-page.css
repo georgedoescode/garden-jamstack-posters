@@ -72,53 +72,6 @@ html.poster-page {
   display: block;
 }
 
-@media only screen and (max-width: 64rem) {
-  .posters {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .home-header {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  .home-header__text {
-    grid-column: 1 / 5;
-  }
-
-  .home-header__flower {
-    grid-column: 5 / 7;
-  }
-}
-
-@media only screen and (max-width: 48rem) {
-  .homer-header {
-    margin-top: var(--base-spacing);
-    grid-gap: 0;
-  }
-
-  .home-header__flower {
-    position: absolute;
-    top: var(--base-spacing);
-    right: var(--base-spacing);
-    width: var(--space-l);
-  }
-
-  .posters {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .home-header__text {
-    grid-column: -1 / 1;
-    margin-top: calc(var(--space-2xl-3xl));
-  }
-}
-
-@media only screen and (max-width: 24rem) {
-  .posters {
-    grid-template-columns: repeat(1, 1fr);
-  }
-}
-
 @media screen and (prefers-reduced-motion: no-preference) {
   .spinning-flower {
     will-change: transform;

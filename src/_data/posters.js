@@ -21,22 +21,25 @@ function getDatesBetweenDates(startDate, endDate) {
 
   dates = [...dates, endDate];
 
-  return dates.reverse();
+  return dates.reverse().map((d) =>
+    new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      month: '2-digit',
+      year: '2-digit',
+    })
+      .format(d)
+      .split('/')
+      .join('-')
+  );
 }
 
 module.exports = function () {
   const dates = getDatesBetweenDates(
     new Date(...START_DATE),
     new Date(...CURRENT_DATE)
-  ).map((d) =>
-    new Intl.DateTimeFormat('en-GB', {
-      day: '2-digit',
-      month: '2-digit',
-      year: '2-digit',
-    }).format(d)
   );
 
   return dates.map((date) => ({
-    seed: date.split('/').join('-'),
+    seed: date,
   }));
 };

@@ -1,0 +1,16 @@
+---
+permalink: "/css/theme.css"
+---
+
+{# 
+  Note: Potential DX issue - CSS syntax highlighting/linting is disabled in this file! 
+  Note: Potential DX issue - This concept of generating a new file outside of the usual output dir introduces some cognitive overhead.
+#}
+
+:root {
+  --green-dark: {{ tokens.colors.greenDark }};
+  --green-base: {{ tokens.colors.greenBase }};
+  --red-base: {{ tokens.colors.redBase }};
+  --yellow-base: {{ tokens.colors.yellowBase }};
+  --pink-base: {{ tokens.colors.pinkBase }};
+}

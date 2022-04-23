@@ -1,16 +1,18 @@
 ---
 eleventyComputed:
-  title: "{{ site.title }}"
+  title: "{{ site.name }}"
   socialImage: "{{ site.url }}/og-image.png"
-description: A peculiar little website that will create a generative poster design every day until the summer solstice.
-layout: base-layout.njk
+metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
+pageCSS: ['home.css']
+layout: layouts/base.njk
 ---
 
-<img class="background-splodges" src="/background-splodges.svg" alt="" />
+<img class="background-splodges" src="/background-splodges.svg" alt=""/>
 
 <header class="home-header">
   <div class="home-header__text">
-    <h1>“Garden” — <br/> Generative Posters</h1>
+    <h1>“Garden”</h1>
+    <h2>Generative Posters</h2>
     <p>
       Hey! Welcome to Garden — a peculiar little website that will create a generative poster design every day until the summer solstice. 
       It runs on Eleventy + Netlify + Puppeteer and <strong>ships 0 lines of JavaScript.</strong>
@@ -20,23 +22,24 @@ layout: base-layout.njk
     </a>
   </div>
   <div class="home-header__flower">
-    {% include 'flower.njk' %}
+    {% svg "./src/img/flower.svg", "spinning-flower", "aria-hidden='true'" %}
   </div>
 </header>
 
 <main>
-  <ul class="posters">
+  <ul class="posters auto-fit-grid">
     <li class="posters__info-card">
       <div class="posters__info-card-inner">
-        <p>Next — {{ site.tomorrowsDateText }}</p>
+        <p>Next Poster Generation — {{ site.tomorrowsDateText }}</p>
       </div>
     </li>
     {% for poster in posters %}
       <li class="posters__generation">
         <a href="/generations/{{ poster.seed }}/">
+          <div class="visually-hidden">Poster generated on {{ poster.seed }}</div>
           <img 
             src="/generations/{{ poster.seed }}/poster.svg" 
-            alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
+            alt=""
             loading="lazy"
           />
         </a>
@@ -46,5 +49,6 @@ layout: base-layout.njk
 </main>
 
 <footer class="home-footer">
-  <p>Made by <a href="https://twitter.com/georgedoescode" target="_blank">George Francis</a></p>
+  <p>Made by <a href="https://twitter.com/georgedoescode" target="_blank">George Francis</a>
+  </p>
 </footer>

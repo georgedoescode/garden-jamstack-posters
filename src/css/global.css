@@ -47,8 +47,9 @@
 body {
   font-family: 'DM Sans', system-ui;
   font-size: var(--step-0);
-  line-height: 1.618;
   color: var(--base-color);
+  line-height: 1.618;
+  text-rendering: optimizeSpeed;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,7 +63,6 @@ a {
   color: var(--base-color);
   text-underline-offset: 0.5rem;
   text-decoration-thickness: 0.1rem;
-  color: #3251f6;
 }
 
 h1 {
@@ -92,6 +92,25 @@ svg {
 
 /* Utilities */
 
+.auto-fit-grid {
+  --grid-gap: var(--space-m);
+  --grid-min-item-size: 8rem;
+  --grid-max-columns: 1;
+
+  display: grid;
+  grid-gap: var(--grid-gap);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(
+        100% / var(--grid-max-columns) - var(--grid-gap),
+        var(--grid-min-item-size)
+      ),
+      1fr
+    )
+  );
+}
+
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
@@ -100,4 +119,23 @@ svg {
   position: absolute;
   white-space: nowrap;
   width: 1px;
+}
+
+/* Motion */
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .spinning-flower {
+    will-change: transform;
+    animation: rotate 24s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(359deg);
+    }
+  }
 }

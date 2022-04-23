@@ -5,15 +5,12 @@
 }
 
 .home-header {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  align-items: center;
-  grid-gap: var(--base-spacing);
   margin: var(--space-2xl-3xl) 0;
 }
 
+/* TODO - implement stack here? */
+
 .home-header__text {
-  grid-column: 2 / 6;
   display: flex;
   flex-direction: column;
   gap: var(--space-l-xl);
@@ -26,14 +23,17 @@
 
 .home-header__flower {
   width: 50%;
-  grid-column: 6 / 8;
-  place-self: center;
 }
 
+/* 
+  Note: Both this element and the header previously used a strict 12 column grid,
+  I found this rather brittle and required lots of additional media queries to handle 
+  viewport changes! 
+*/
 .posters {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: var(--base-spacing);
+  --grid-gap: var(--base-spacing);
+  --grid-min-item-size: 16rem;
+  --grid-max-columns: 2;
 }
 
 .posters li {
@@ -74,4 +74,27 @@
   display: grid;
   place-items: center;
   margin: var(--space-m) 0;
+}
+
+@media only screen and (max-width: 48rem) {
+  .home-header__flower {
+    position: absolute;
+    top: var(--base-spacing);
+    right: var(--base-spacing);
+    width: var(--space-l);
+  }
+}
+
+@media screen and (prefers-reduced-motion: no-preference) {
+  .posters li:not(.posters__info-card) {
+    transition: transform 150ms ease-in-out;
+  }
+
+  .posters li:focus-within {
+    transform: translateY(-1%);
+  }
+
+  .posters li:not(.posters__info-card):hover {
+    transform: translateY(-2%);
+  }
 }

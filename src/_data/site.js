@@ -11,7 +11,7 @@ function getTomorrowsDate() {
 }
 
 module.exports = {
-  title: 'Garden | Generative Poster Design',
+  name: 'Garden | Generative Poster Design',
   url: process.env.URL,
   tomorrowsDateText: getTomorrowsDate(),
 };

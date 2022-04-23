@@ -1,0 +1,35 @@
+{# Page Specific CSS #}
+{# Note: This approach works well when you have a small ammount of CSS, but will become inefficient quickly!  #}
+{% if pageCSS %}
+  {% set css %}
+    {% include '../../css/global.css' %}
+    {% for item in pageCSS %}
+      {% include '../../css/' + item %}
+    {% endfor %}
+  {% endset %}
+{% endif %}
+
+<!DOCTYPE html>
+<html lang="en" class="{{ page.fileSlug or 'home' }}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {# Favicons #}
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    {# Meta #}
+    {% include 'partials/meta-info.njk' %}
+    {# Fonts #}
+    <link rel="stylesheet" href="/fonts/dm-sans/stylesheet.css" />
+    {# Theme CSS (Tokens) #}
+    <link rel="stylesheet" href="/css/theme.css">
+    {# Page CSS #}
+    <style>
+      {{ css | cssmin | safe }}
+    </style>
+  </head>
+  <body>
+    {{ content | safe }}
+  </body>
+</html>
