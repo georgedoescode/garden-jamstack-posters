@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "eleventy --serve --port=8081",
-    "build": "eleventy ; node functions/generate-social-images.js"
+    "watch:css": "esbuild --bundle src/css/main.css --outfile=dist/css/main.css --minify --watch",
+    "build:css": "esbuild --bundle src/css/main.css --outfile=dist/css/main.css --minify",
+    "watch:eleventy": "eleventy --serve --port=8081",
+    "build:eleventy": "eleventy",
+    "watch": "npm-run-all --parallel watch:*",
+    "build": "npm-run-all build:eleventy build:css ; node functions/generate-social-images.js "
   },
   "keywords": [],
   "author": "",

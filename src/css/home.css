@@ -30,6 +30,7 @@
   I found this rather brittle and required lots of additional media queries to handle 
   viewport changes! 
 */
+
 .posters {
   --grid-gap: var(--base-spacing);
   --grid-min-item-size: 16rem;

@@ -1,14 +1,3 @@
-{# Page Specific CSS #}
-{# Note: This approach works well when you have a small ammount of CSS, but will become inefficient quickly!  #}
-{% if pageCSS %}
-  {% set css %}
-    {% include '../../css/global.css' %}
-    {% for item in pageCSS %}
-      {% include '../../css/' + item %}
-    {% endfor %}
-  {% endset %}
-{% endif %}
-
 <!DOCTYPE html>
 <html lang="en" class="{{ page.fileSlug or 'home' }}">
   <head>
@@ -22,12 +11,10 @@
     {% include 'partials/meta-info.njk' %}
     {# Fonts #}
     <link rel="stylesheet" href="/fonts/dm-sans/stylesheet.css" />
-    {# Theme CSS (Tokens) #}
+    {# Theme CSS #}
     <link rel="stylesheet" href="/css/theme.css">
-    {# Page CSS #}
-    <style>
-      {{ css | cssmin | safe }}
-    </style>
+    {# Site CSS #}
+    <link rel="stylesheet" href="/css/main.css">
   </head>
   <body>
     {{ content | safe }}

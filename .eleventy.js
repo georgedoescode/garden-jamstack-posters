@@ -53,7 +53,7 @@ module.exports = function (eleventyConfig) {
     './src/img/favicon-32x32.png': 'favicon-32x32.png',
   });
 
-  eleventyConfig.addWatchTarget('./src/css/global.css');
+  eleventyConfig.addWatchTarget('./src/css');
 
   eleventyConfig.addNunjucksShortcode('svg', svgShortcode);
 

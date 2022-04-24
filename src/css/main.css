@@ -1,0 +1,8 @@
+/* 
+  Note: Potential performance optimisation - we could split out this CSS so that both 
+  home and poster-page write to their own stylesheet, reducing unused CSS.
+*/
+
+@import './global.css';
+@import './home.css';
+@import './poster-page.css';
