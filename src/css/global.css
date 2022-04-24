@@ -93,14 +93,19 @@ svg {
   object-fit: cover;
 }
 
-@media screen and (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
   body {
     --background-color: var(--green-dark);
     --text-color: var(--green-light);
   }
 }
 
-/* Composition */ /* An extension of Steph Eckles' Smol CSS grid that can enforce a minimum number of columns https://smolcss.dev/#smol-css-grid */
+/* Composition */
+
+/* 
+  An extension of Steph Eckles' Smol CSS grid that can enforce a 
+  minimum number of columns https://smolcss.dev/#smol-css-grid 
+*/
 .auto-fit-grid {
   --grid-gap: var(--space-m);
   --grid-min-item-size: 8rem;

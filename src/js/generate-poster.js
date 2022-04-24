@@ -280,6 +280,9 @@ function generatePoster(seed, colorTokens, theme) {
     colorTokens.yellowBase,
   ];
 
+  const textColor =
+    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark;
+
   const cellFillChance = 0.125;
   const bottomPadding = 128 + 24;
   const gridPadding = 64;
@@ -320,7 +323,7 @@ function generatePoster(seed, colorTokens, theme) {
       family: 'DM Sans',
       weight: 700,
       leading: 1,
-      fill: '#132A21',
+      fill: textColor,
     })
     .x(gridPadding)
     .y(height - gridPadding - 29);

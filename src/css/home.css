@@ -38,20 +38,13 @@
 }
 
 .posters li {
-  --border-color: #f6f6f6;
-
   width: 100%;
-}
-
-.posters li:focus-within {
-  --border-color: '#000';
 }
 
 .posters li img {
   /* display: block; */
   aspect-ratio: 3 / 4;
-  box-shadow: 0px 0px 16px 0px hsla(0, 100%, 0%, 0.025),
-    2px 2px 6px 0px hsla(0, 100%, 0%, 0.025);
+  border: 1px solid var(--green-light);
   border-radius: var(--border-radius);
 }
 

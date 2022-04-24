@@ -43,7 +43,7 @@ html.poster-page {
   aspect-ratio: 3 / 4;
   width: auto;
   height: 80vmin;
-  box-shadow: 8px 10px 32px 0px var(--shadow-color);
+  border: 1px solid var(--green-light);
   border-radius: var(--border-radius);
 }
 
@@ -71,7 +71,7 @@ html.poster-page {
   display: block;
 }
 
-@media screen and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .spinning-flower {
     will-change: transform;
     animation: rotate 24s linear infinite;
