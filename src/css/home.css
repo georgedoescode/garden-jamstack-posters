@@ -42,7 +42,6 @@
 }
 
 .posters li img {
-  /* display: block; */
   aspect-ratio: 3 / 4;
   border: 1px solid var(--green-light);
   border-radius: var(--border-radius);
