@@ -37,7 +37,6 @@ html.poster-page {
   grid-column: 1;
   font-weight: 700;
   text-decoration-thickness: 0.125rem;
-  color: var(--base-color);
 }
 
 .poster-page main img {

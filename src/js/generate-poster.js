@@ -17,7 +17,7 @@ const dmSansEncoded = require('../fonts/dm-sans-encoded');
 
 const BASE_SEED = 'Like a circle round the sun';
 
-const background = '#fff';
+let background = '#fff';
 
 const colorStore = new Set();
 
@@ -246,7 +246,7 @@ function round(value, step) {
   return Math.round(value * inv) / inv;
 }
 
-function generatePoster(seed, colorTokens) {
+function generatePoster(seed, colorTokens, theme) {
   const width = 768;
   const height = 1024;
 
@@ -257,6 +257,10 @@ function generatePoster(seed, colorTokens) {
 
   const svg = SVG(document.documentElement).viewbox(0, 0, width, height);
 
+  if (theme === 'dark') {
+    background = colorTokens.greenDark;
+  }
+
   svg.node.innerHTML += `
     <defs>
         <style>
@@ -266,10 +270,10 @@ function generatePoster(seed, colorTokens) {
   `;
 
   const colors = [
-    colorTokens.greenDark,
-    colorTokens.greenDark,
-    colorTokens.greenDark,
-    colorTokens.greenDark,
+    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
+    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
+    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
+    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
     colorTokens.greenBase,
     colorTokens.redBase,
     colorTokens.pinkBase,

@@ -48,7 +48,7 @@
 }
 
 .posters li img {
-  display: block;
+  /* display: block; */
   aspect-ratio: 3 / 4;
   box-shadow: 0px 0px 16px 0px hsla(0, 100%, 0%, 0.025),
     2px 2px 6px 0px hsla(0, 100%, 0%, 0.025);

@@ -44,9 +44,13 @@
 }
 
 body {
+  --background-color: #fff;
+  --text-color: var(--green-dark);
+
   font-family: 'DM Sans', system-ui;
   font-size: var(--step-0);
-  color: var(--base-color);
+  color: var(--text-color);
+  background: var(--background-color);
   line-height: 1.618;
   text-rendering: optimizeSpeed;
 
@@ -59,7 +63,7 @@ ul {
 }
 
 a {
-  color: var(--base-color);
+  color: var(--text-color);
   text-underline-offset: 0.5rem;
   text-decoration-thickness: 0.1rem;
 }
@@ -89,12 +93,14 @@ svg {
   object-fit: cover;
 }
 
-/* Composition */
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    --background-color: var(--green-dark);
+    --text-color: var(--green-light);
+  }
+}
 
-/* 
-  An extension of Steph Eckles' Smol CSS grid that can enforce a minimum number of columns
-  https://smolcss.dev/#smol-css-grid 
-*/
+/* Composition */ /* An extension of Steph Eckles' Smol CSS grid that can enforce a minimum number of columns https://smolcss.dev/#smol-css-grid */
 .auto-fit-grid {
   --grid-gap: var(--space-m);
   --grid-min-item-size: 8rem;

@@ -1,16 +1,16 @@
 ---
 eleventyComputed:
-  title: "{{ poster.seed }}"
-  socialImage: "{{ site.url }}/og-images/{{ poster.seed }}.png"
+  title: "{{ date }}"
+  socialImage: "{{ site.url }}/og-images/{{ date }}.png"
 metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
 pageClass: "poster"
 pageCSS: ['poster-page.css']
 layout: layouts/base.njk
 pagination:
-  data: posters
+  data: dates
   size: 1
-  alias: poster
-permalink: "generations/{{ poster.seed }}/index.html"
+  alias: date
+permalink: "generations/{{ date }}/index.html"
 ---
 
 {# Note: Potential SEO issue - These pages are not very content rich and might not do wonders for SEO!  #}
@@ -26,16 +26,20 @@ permalink: "generations/{{ poster.seed }}/index.html"
 
 {# Poster generation #}
 <main>
-  <img 
-    src="./poster.svg" 
-    alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
-  >
+  <picture>
+    <source srcset="/generations/{{ date }}/poster-dark.svg" media="(prefers-color-scheme: dark)">
+    <img 
+      src="/generations/{{ date }}/poster-light.svg" 
+      alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
+      loading="lazy"
+    />
+  </picture>
 </main>
 
 {# Footer #}
 <footer class="poster-page__footer">
   {% svg "./src/images/illustrations/stem.svg", "poster-page__footer-stem", "aria-hidden='true'" %}
-  <a href="http://twitter.com/share?url={{site.url}}/generations/{{poster.seed}}/" target="_blank" title="Share on twitter">
+  <a href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share on twitter">
     {% svg "./src/images/icons/twitter-icon.svg", "", "aria-hidden='true'" %}
   </a>
 </footer>

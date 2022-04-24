@@ -37,11 +37,14 @@ layout: layouts/base.njk
       <li class="posters__generation">
         <a href="/generations/{{ poster.seed }}/">
           <div class="visually-hidden">Poster generated on {{ poster.seed }}</div>
-          <img 
-            src="/generations/{{ poster.seed }}/poster.svg" 
-            alt=""
-            loading="lazy"
-          />
+          <picture>
+            <source srcset="/generations/{{ poster.seed }}/poster-dark.svg" media="(prefers-color-scheme: dark)">
+            <img 
+              src="/generations/{{ poster.seed }}/poster-light.svg" 
+              alt=""
+              loading="lazy"
+            />
+          </picture>
         </a>
       </li>
     {% endfor %}

@@ -8,12 +8,17 @@ class PosterSVG {
         size: 1,
         alias: 'poster',
       },
-      permalink: (data) => `generations/${data.poster.seed}/poster.svg`,
+      permalink: (data) =>
+        `generations/${data.poster.seed}/poster-${data.poster.theme}.svg`,
     };
   }
 
   render(data) {
-    return generatePoster(data.poster.seed, data.tokens.colors);
+    return generatePoster(
+      data.poster.seed,
+      data.tokens.colors,
+      data.poster.theme
+    );
   }
 }
 
