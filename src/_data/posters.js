@@ -22,12 +22,14 @@ function getDatesBetweenDates(startDate, endDate) {
   dates = [...dates, endDate];
 
   return dates.reverse().map((d) =>
+    // DD-MM-YY
     new Intl.DateTimeFormat('en-GB', {
       day: '2-digit',
       month: '2-digit',
       year: '2-digit',
     })
       .format(d)
+      // Remove slashes from dates as they cause issues when used as file paths
       .split('/')
       .join('-')
   );
@@ -40,6 +42,7 @@ module.exports = function () {
   );
 
   return dates.map((date) => ({
+    // The PRNG seed value for each poster is the date (DD-MM-YY) it was created
     seed: date,
   }));
 };

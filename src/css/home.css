@@ -71,10 +71,10 @@
 }
 
 .home-footer {
-  height: var(--space-3xl);
   display: grid;
   place-items: center;
   margin: var(--space-m) 0;
+  padding: var(--space-xl) 0;
 }
 
 @media only screen and (max-width: 48rem) {

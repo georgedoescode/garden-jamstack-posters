@@ -33,8 +33,7 @@
 
   --base-spacing: var(--space-m-l);
   --border-radius: 0.75rem;
-  --base-color: #132a21;
-  --icon-color: var(--base-color);
+  --base-color: var(--green-dark);
 }
 
 * {
@@ -68,7 +67,7 @@ a {
 h1 {
   font-size: var(--step-4);
   letter-spacing: -0.05em;
-  line-height: 1.25;
+  line-height: 1.1;
 }
 
 p {
@@ -90,7 +89,7 @@ svg {
   object-fit: cover;
 }
 
-/* Utilities */
+/* Composition */
 
 /* 
   An extension of Steph Eckles' Smol CSS grid that can enforce a minimum number of columns
@@ -114,6 +113,8 @@ svg {
     )
   );
 }
+
+/* Utilities */
 
 .visually-hidden {
   clip: rect(0 0 0 0);

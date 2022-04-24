@@ -22,7 +22,6 @@
     "bezier-js": "^6.1.0",
     "chrome-aws-lambda": "^10.1.0",
     "clean-css": "^5.3.0",
-    "html-minifier": "^4.0.0",
     "puppeteer-core": "^13.6.0",
     "stream": "0.0.2",
     "svg-arc-to-cubic-bezier": "^3.2.0",

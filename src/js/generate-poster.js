@@ -10,7 +10,7 @@ const {
 const { Vector2D } = require('@georgedoescode/vector2d');
 const { optimize } = require('svgo');
 
-const { Glob, Node } = require('./glob');
+const { Glob, Node } = require('./utils/glob');
 const { Bezier } = require('bezier-js');
 
 const dmSansEncoded = require('../fonts/dm-sans-encoded');
