@@ -34,7 +34,7 @@
 .posters {
   --grid-gap: var(--base-spacing);
   --grid-min-item-size: 16rem;
-  --grid-max-columns: 2;
+  --grid-min-columns: 2;
 }
 
 .posters li {

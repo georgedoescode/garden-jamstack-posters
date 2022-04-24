@@ -14,3 +14,4 @@
 - Syntax highlighting/linting is disabled in my theme.njk file. This could lead to DX issues and mistakes when editing.
 - As more days go by, builds will become longer. Could we work around this using on demand builders?
 - Created by own SVG shortcode to allow more flexible accessibility options and optimisation using SVGO.
+- I am not using any autoprefixing, etc, on my CSS as this project is and experiment aimed at dev folk. If I were to expand it, I would potentially introduce PostCSS or equivalent! For now it is only using esbuild for file concatenation and minification as it is speedy and simple.

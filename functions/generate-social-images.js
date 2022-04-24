@@ -41,14 +41,21 @@ function getDirectories(srcPath) {
   for (let i = 0; i < allPages.length; i++) {
     const entry = allPages[i];
 
-    await page.goto('file://' + entry.path, {
-      waitUntil: ['networkidle0'],
-    });
+    await page.goto('file://' + entry.path);
 
-    await page.evaluateHandle('document.fonts.ready');
+    const siteThemeCSS = fs
+      .readFileSync(path.resolve(__dirname, '../dist/css/theme.css'))
+      .toString();
+
+    const siteMainCSS = fs
+      .readFileSync(path.resolve(__dirname, '../dist/css/main.css'))
+      .toString();
 
     await page.addStyleTag({
       content: `
+          ${siteThemeCSS}
+          ${siteMainCSS}
+
           a {
             display: none;
           }
@@ -58,13 +65,17 @@ function getDirectories(srcPath) {
           }
 
           .poster-page {
-            --icon-color: #fff;
             --shadow-color: hsla(0, 100%, 100%, 0.1);
           }
 
           .poster-page body {
+            color: #fff;
             height: 100vh;
             background: #091510;
+          }
+
+          .spinning-flower {
+            animation-play-state: paused;
           }
         `,
     });

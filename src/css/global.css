@@ -92,10 +92,14 @@ svg {
 
 /* Utilities */
 
+/* 
+  An extension of Steph Eckles' Smol CSS grid that can enforce a minimum number of columns
+  https://smolcss.dev/#smol-css-grid 
+*/
 .auto-fit-grid {
   --grid-gap: var(--space-m);
   --grid-min-item-size: 8rem;
-  --grid-max-columns: 1;
+  --grid-min-columns: 1;
 
   display: grid;
   grid-gap: var(--grid-gap);
@@ -103,7 +107,7 @@ svg {
     auto-fit,
     minmax(
       min(
-        100% / var(--grid-max-columns) - var(--grid-gap),
+        100% / var(--grid-min-columns) - var(--grid-gap),
         var(--grid-min-item-size)
       ),
       1fr
