@@ -1,6 +1,7 @@
 /* Globals */
 
-:root {
+/* Use :where() to keep theme rules low specificity! */
+:where(html) {
   --step--2: clamp(0.8rem, calc(0.67rem + 0.11vw), 0.69rem);
   --step--1: clamp(1rem, calc(0.8rem + 0.17vw), 0.83rem);
   --step-0: clamp(1rem, calc(0.95rem + 0.25vw), 1.25rem);
@@ -31,22 +32,20 @@
 
   --space-s-l: clamp(1rem, calc(0.7rem + 1.5vw), 2.5rem);
 
-  --base-spacing: var(--space-m-l);
+  --base-rhythm: var(--space-m-l);
   --border-radius: 0.75rem;
-  --base-color: var(--green-dark);
+  --background-color: #fff;
+  --text-color: var(--green-dark);
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  outline-color: var(--base-color);
 }
 
 body {
-  --background-color: #fff;
-  --text-color: var(--green-dark);
-
+  padding: 0 var(--base-rhythm);
   font-family: 'DM Sans', system-ui;
   font-size: var(--step-0);
   color: var(--text-color);
@@ -68,14 +67,19 @@ a {
   text-decoration-thickness: 0.1rem;
 }
 
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
 h1 {
   font-size: var(--step-4);
-  letter-spacing: -0.05em;
-  line-height: 1.1;
 }
 
 p {
-  max-width: 50ch;
+  max-width: 56ch;
 }
 
 img,
@@ -93,53 +97,19 @@ svg {
   object-fit: cover;
 }
 
+/* Dark theme */
+
+/* Note: It would be good to introduce a dark mode toggle to give folks the choice */
 @media (prefers-color-scheme: dark) {
-  body {
+  :where(html) {
     --background-color: var(--green-dark);
     --text-color: var(--green-light);
   }
 }
 
-/* Composition */
-
-/* 
-  An extension of Steph Eckles' Smol CSS grid that can enforce a 
-  minimum number of columns https://smolcss.dev/#smol-css-grid 
-*/
-.auto-fit-grid {
-  --grid-gap: var(--space-m);
-  --grid-min-item-size: 8rem;
-  --grid-min-columns: 1;
-
-  display: grid;
-  grid-gap: var(--grid-gap);
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(
-      min(
-        100% / var(--grid-min-columns) - var(--grid-gap),
-        var(--grid-min-item-size)
-      ),
-      1fr
-    )
-  );
-}
-
-/* Utilities */
-
-.visually-hidden {
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  height: 1px;
-  overflow: hidden;
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-}
-
 /* Motion */
 
-@media screen and (prefers-reduced-motion: no-preference) {
+@media (prefers-reduced-motion: no-preference) {
   .spinning-flower {
     will-change: transform;
     animation: rotate 24s linear infinite;

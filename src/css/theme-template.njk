@@ -8,7 +8,7 @@ permalink: "/css/theme.css"
   mixing .njk and .css files together in one directory.
 #}
 
-:root {
+:where(html) {
   --green-dark: {{ tokens.colors.greenDark }};
   --green-base: {{ tokens.colors.greenBase }};
   --green-light: {{ tokens.colors.greenLight }};

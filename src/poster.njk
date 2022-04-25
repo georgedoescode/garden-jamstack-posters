@@ -4,7 +4,6 @@ eleventyComputed:
   socialImage: "{{ site.url }}/og-images/{{ date }}.png"
 metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
 pageClass: "poster"
-pageCSS: ['poster-page.css']
 layout: layouts/base.njk
 pagination:
   data: dates
@@ -19,9 +18,9 @@ permalink: "generations/{{ date }}/index.html"
 <img class="background-splodges" src="/background-splodges.svg" alt="" />
 
 {# Navigation #}
-<nav class="poster-page__header">
+<nav class="poster__header">
   {% svg "./src/images/illustrations/flower.svg", "spinning-flower", "aria-hidden='true'" %}
-  <a href="/">View all posters</a>
+  <a href="/">All posters</a>
 </nav>
 
 {# Poster generation #}
@@ -37,9 +36,9 @@ permalink: "generations/{{ date }}/index.html"
 </main>
 
 {# Footer #}
-<footer class="poster-page__footer">
-  {% svg "./src/images/illustrations/stem.svg", "poster-page__footer-stem", "aria-hidden='true'" %}
-  <a href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share on twitter">
+<footer class="poster__footer">
+  {% svg "./src/images/illustrations/stem.svg", "poster__footer-stem", "aria-hidden='true'" %}
+  <a href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share this poster on Twitter">
     {% svg "./src/images/icons/twitter-icon.svg", "", "aria-hidden='true'" %}
   </a>
 </footer>

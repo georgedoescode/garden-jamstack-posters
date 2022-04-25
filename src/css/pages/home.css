@@ -1,28 +1,24 @@
 /* Home */
 
-.home body {
-  padding: 0 var(--base-spacing);
-}
-
 .home-header {
-  margin: var(--space-2xl-3xl) 0;
+  margin: var(--space-3xl) 0;
 }
 
 /* TODO - implement stack here? */
 
-.home-header__text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-l-xl);
-}
-
-.home-header__text h1 {
+.home-header h1 {
   text-indent: -0.4em;
   max-width: 16ch;
 }
 
+.home-header a {
+  display: block;
+}
+
 .home-header__flower {
-  width: 50%;
+  position: absolute;
+  inset: var(--base-rhythm) var(--base-rhythm) auto auto;
+  width: var(--space-l);
 }
 
 /* 
@@ -32,24 +28,17 @@
 */
 
 .posters {
-  --grid-gap: var(--base-spacing);
+  --grid-gap: var(--base-rhythm);
   --grid-min-item-size: 16rem;
   --grid-min-columns: 2;
 }
 
-.posters li {
+.posters__generation {
   width: 100%;
-}
-
-.posters li img {
   aspect-ratio: 3 / 4;
+  border-radius: var(--border-radius);
   border: 1px solid var(--green-light);
-  border-radius: var(--border-radius);
-}
-
-.posters__info-card {
-  border-radius: var(--border-radius);
-  aspect-ratio: 3 / 4;
+  overflow: hidden;
 }
 
 .posters__info-card-inner {
@@ -57,25 +46,13 @@
   height: 100%;
   display: grid;
   place-items: center;
-  padding: var(--base-spacing);
+  padding: var(--base-rhythm);
   text-align: center;
   font-weight: 700;
 }
 
 .home-footer {
-  display: grid;
-  place-items: center;
-  margin: var(--space-m) 0;
-  padding: var(--space-xl) 0;
-}
-
-@media only screen and (max-width: 48rem) {
-  .home-header__flower {
-    position: absolute;
-    top: var(--base-spacing);
-    right: var(--base-spacing);
-    width: var(--space-l);
-  }
+  padding: var(--space-2xl) 0;
 }
 
 @media screen and (prefers-reduced-motion: no-preference) {

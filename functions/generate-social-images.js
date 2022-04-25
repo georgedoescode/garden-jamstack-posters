@@ -64,11 +64,11 @@ function getDirectories(srcPath) {
             display: none;
           }
 
-          .poster-page {
+          .poster {
             --shadow-color: hsla(0, 100%, 100%, 0.1);
           }
 
-          .poster-page body {
+          .poster body {
             color: #fff;
             height: 100vh;
             background: #091510;

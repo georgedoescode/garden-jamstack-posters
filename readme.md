@@ -16,3 +16,8 @@
 - Created by own SVG shortcode to allow more flexible accessibility options and optimisation using SVGO.
 - I'm not using any autoprefixing, etc, on my CSS as this project is and experiment aimed at dev folk. If I were to expand it, I would potentially introduce PostCSS or equivalent! For now it is only using esbuild for file concatenation and minification as it is speedy and simple.
 - I'm not 100% sure about using two different templating languages in the same project, but as of right now the DX of using addNunjucksGlobal for generative templates isn't great (it requires an entire eleventy restart to reflect changes)
+
+### CSS
+
+- Uses a simple CUBE methodology
+- Has no device resolution media queries!

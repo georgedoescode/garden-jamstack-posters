@@ -1,0 +1,17 @@
+/* 
+  STACK
+
+  TODO - add description here
+
+  Custom properties and configuration: 
+
+  TODO - add custom properties here
+*/
+
+.stack {
+  --stack-space: var(--base-rhythm);
+}
+
+.stack > * + * {
+  margin-block-start: var(--stack-space, 1.5em);
+}
