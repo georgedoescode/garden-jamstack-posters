@@ -1,5 +1,3 @@
-/* Poster Page */
-
 html.poster {
   /* 
     Note: -webkit-fill-available definitions is required to "fix" 100vh 
@@ -8,7 +6,8 @@ html.poster {
   height: -webkit-fill-available;
 }
 
-.poster body {
+html.poster body {
+  /* Reserve space above/below the poster for the header and footer */
   --poster-vertical-gap: var(--space-2xl);
 
   height: 100vh;
@@ -50,6 +49,6 @@ html.poster {
 }
 
 .poster-footer__twitter-share {
-  width: var(--space-m);
   display: flex;
+  width: var(--space-m);
 }

@@ -1,12 +1,4 @@
 {
   "singleQuote": true,
-  "tabWidth": 2,
-  "overrides": [
-    {
-      "files": "*.njk",
-      "options": {
-        "parser": "nunjucks"
-      }
-    }
-  ]
+  "tabWidth": 2
 }

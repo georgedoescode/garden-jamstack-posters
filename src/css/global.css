@@ -20,8 +20,7 @@ a {
 }
 
 h1,
-h2,
-h3 {
+h2 {
   line-height: var(--leading-tight);
   letter-spacing: -0.025em;
   font-weight: 700;
@@ -29,6 +28,10 @@ h3 {
 
 h1 {
   font-size: var(--step-4);
+}
+
+h2 {
+  font-size: var(--step-3);
 }
 
 p {

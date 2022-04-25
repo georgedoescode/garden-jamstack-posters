@@ -3,32 +3,40 @@ eleventyComputed:
   title: "{{ site.name }}"
   socialImage: "{{ site.url }}/og-image.png"
 metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
-pageCSS: ['home.css']
 layout: layouts/base.njk
 ---
 
+{# Splodges #}
 <img class="splodges" src="/background-splodges.svg" alt=""/>
 
-<div class="home-header__flower">
+{# Flower #}
+<div class="home-flower">
   {% svg "./src/images/illustrations/flower.svg", "flower", "aria-hidden='true'" %}
 </div>
 
+{# Header #}
 <header class="home-header center-xy">
   <div class="stack">
     {# Note: Voiceover on macOS reads this as "Heading level 1, 2 items" #}
-    <h1>
+    <h1 class="home-header__title">
       “Garden” — <br /> Generative Posters
     </h1>
-    <p>
-      Hey! Welcome to Garden — a peculiar little website that will create a generative poster design every day until the summer solstice. 
-      It runs on Eleventy + Netlify + Puppeteer and <strong>ships 0 lines of JavaScript.</strong>
+    <p class="home-header__description">
+      Hey! Welcome to Garden — a peculiar little website that will create a generative poster 
+      design every day until the summer solstice. It runs on Eleventy + Netlify + Puppeteer and 
+      <strong>ships 0 lines of JavaScript.</strong>
     </p>
-    <a href="https://github.com/georgedoescode/garden-jamstack-posters" target="_blank">
+    <a 
+      class="home-header__repo-link"
+      href="https://github.com/georgedoescode/garden-jamstack-posters" 
+      target="_blank"
+    >
       Browse the repository on GitHub!
     </a>
   </div>
 </header>
 
+{# Gallery #}
 <main>
   <ul aria-label="Daily poster generations" class="posters auto-grid">
     <li class="posters__info-card center-xy">
@@ -39,7 +47,10 @@ layout: layouts/base.njk
         <a href="/generations/{{ poster.seed }}/">
           <div class="visually-hidden">Poster generated on {{ poster.seed }}</div>
           <picture>
-            <source srcset="/generations/{{ poster.seed }}/poster-dark.svg" media="(prefers-color-scheme: dark)">
+            <source 
+              srcset="/generations/{{ poster.seed }}/poster-dark.svg" 
+              media="(prefers-color-scheme: dark)"
+            >
             <img 
               src="/generations/{{ poster.seed }}/poster-light.svg" 
               alt=""
@@ -52,7 +63,12 @@ layout: layouts/base.njk
   </ul>
 </main>
 
+{# Footer #}
 <footer class="home-footer center-xy">
-  <p>Made by <a href="https://twitter.com/georgedoescode" target="_blank">George Francis</a>
+  <p>
+    Made by 
+    <a href="https://twitter.com/georgedoescode" target="_blank">
+      George Francis
+    </a>
   </p>
 </footer>

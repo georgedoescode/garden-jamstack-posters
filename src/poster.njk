@@ -14,7 +14,7 @@ permalink: "generations/{{ date }}/index.html"
 
 {# Note: Potential SEO issue - These pages are not very content rich and might not do wonders for SEO!  #}
 
-{# Decorative splodges #}
+{# Splodges #}
 <img class="splodges" src="/background-splodges.svg" alt="" />
 
 {# Navigation #}
@@ -23,10 +23,13 @@ permalink: "generations/{{ date }}/index.html"
   {% svg "./src/images/illustrations/flower.svg", "poster-nav__flower flower", "aria-hidden='true'" %}
 </nav>
 
-{# Poster generation #}
+{# Poster #}
 <main>
   <picture>
-    <source srcset="/generations/{{ date }}/poster-dark.svg" media="(prefers-color-scheme: dark)">
+    <source 
+      srcset="/generations/{{ date }}/poster-dark.svg" 
+      media="(prefers-color-scheme: dark)"
+    >
     <img 
       class="poster-image"
       src="/generations/{{ date }}/poster-light.svg" 
@@ -39,7 +42,12 @@ permalink: "generations/{{ date }}/index.html"
 {# Footer #}
 <footer class="poster-footer repel">
   {% svg "./src/images/illustrations/stem.svg", "poster-footer__stem", "aria-hidden='true'" %}
-  <a class="poster-footer__twitter-share" href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share this poster on Twitter">
+  <a 
+    aria-label="Share poster on Twitter"
+    class="poster-footer__twitter-share" 
+    href="http://twitter.com/share?url={{ site.url }}/generations/{{ date }}/" 
+    target="_blank" 
+  >
     {% svg "./src/images/icons/twitter-icon.svg", "", "aria-hidden='true'" %}
   </a>
 </footer>

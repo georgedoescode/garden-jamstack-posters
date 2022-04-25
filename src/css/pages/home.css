@@ -1,19 +1,18 @@
-/* Home */
-
 .home-header {
   margin: var(--space-3xl) 0;
 }
 
-.home-header h1 {
-  text-indent: -0.4em;
+.home-header__title {
   max-width: 16ch;
+  text-indent: -0.4em;
 }
 
-.home-header a {
+.home-header__repo-link {
+  /* Ensure top margin applies in "stack" utility */
   display: block;
 }
 
-.home-header__flower {
+.home-flower {
   position: absolute;
   inset: var(--base-rhythm) var(--base-rhythm) auto auto;
 }
