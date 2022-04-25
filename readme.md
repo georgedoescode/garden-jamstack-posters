@@ -21,3 +21,11 @@
 
 - Uses a simple CUBE methodology
 - Has no device resolution media queries!
+
+### Other
+
+- Highlight "things I'm proud of" at the start.
+  - No resolution media queries!
+  - No client side JS!
+  - Integrates well with design tokens, enabling fun and easy design experimentation in the browser.
+  -

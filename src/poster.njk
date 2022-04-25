@@ -14,13 +14,13 @@ permalink: "generations/{{ date }}/index.html"
 
 {# Note: Potential SEO issue - These pages are not very content rich and might not do wonders for SEO!  #}
 
-{# Background decorative splodges #}
-<img class="background-splodges" src="/background-splodges.svg" alt="" />
+{# Decorative splodges #}
+<img class="splodges" src="/background-splodges.svg" alt="" />
 
 {# Navigation #}
-<nav class="poster__header">
-  {% svg "./src/images/illustrations/flower.svg", "spinning-flower", "aria-hidden='true'" %}
-  <a href="/">All posters</a>
+<nav class="poster-nav repel">
+  <a class="poster-nav__all-posters-link" href="/">All posters</a>
+  {% svg "./src/images/illustrations/flower.svg", "poster-nav__flower flower", "aria-hidden='true'" %}
 </nav>
 
 {# Poster generation #}
@@ -28,6 +28,7 @@ permalink: "generations/{{ date }}/index.html"
   <picture>
     <source srcset="/generations/{{ date }}/poster-dark.svg" media="(prefers-color-scheme: dark)">
     <img 
+      class="poster-image"
       src="/generations/{{ date }}/poster-light.svg" 
       alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
       loading="lazy"
@@ -36,9 +37,9 @@ permalink: "generations/{{ date }}/index.html"
 </main>
 
 {# Footer #}
-<footer class="poster__footer">
-  {% svg "./src/images/illustrations/stem.svg", "poster__footer-stem", "aria-hidden='true'" %}
-  <a href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share this poster on Twitter">
+<footer class="poster-footer repel">
+  {% svg "./src/images/illustrations/stem.svg", "poster-footer__stem", "aria-hidden='true'" %}
+  <a class="poster-footer__twitter-share" href="http://twitter.com/share?url={{site.url}}/generations/{{date}}/" target="_blank" title="Share this poster on Twitter">
     {% svg "./src/images/icons/twitter-icon.svg", "", "aria-hidden='true'" %}
   </a>
 </footer>

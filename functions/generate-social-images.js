@@ -60,7 +60,7 @@ function getDirectories(srcPath) {
             display: none;
           }
 
-          .background-splodges {
+          .splodges {
             display: none;
           }
 
@@ -74,7 +74,7 @@ function getDirectories(srcPath) {
             background: #091510;
           }
 
-          .spinning-flower {
+          .flower {
             animation-play-state: paused;
           }
         `,

@@ -1,8 +1,7 @@
-/* 
-  VISUALLY HIDDEN
-
-  TODO - add description here
-*/
+.center-xy {
+  display: grid;
+  place-items: center;
+}
 
 .visually-hidden {
   clip: rect(0 0 0 0);

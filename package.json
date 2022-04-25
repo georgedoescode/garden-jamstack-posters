@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch:css": "esbuild --bundle src/css/main.css --outfile=dist/css/main.css --minify --watch",
-    "build:css": "esbuild --bundle src/css/main.css --outfile=dist/css/main.css --minify",
+    "watch:css": "esbuild --bundle src/css/index.css --outfile=dist/css/main.css --minify --watch",
+    "build:css": "esbuild --bundle src/css/index.css --outfile=dist/css/main.css --minify",
     "watch:eleventy": "eleventy --serve --port=8081",
     "build:eleventy": "eleventy",
     "social-images": "node functions/generate-social-images.js",

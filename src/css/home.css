@@ -4,8 +4,6 @@
   margin: var(--space-3xl) 0;
 }
 
-/* TODO - implement stack here? */
-
 .home-header h1 {
   text-indent: -0.4em;
   max-width: 16ch;
@@ -18,14 +16,7 @@
 .home-header__flower {
   position: absolute;
   inset: var(--base-rhythm) var(--base-rhythm) auto auto;
-  width: var(--space-l);
 }
-
-/* 
-  Note: Both this element and the header previously used a strict 12 column grid,
-  I found this rather brittle and required lots of additional media queries to handle 
-  viewport changes! 
-*/
 
 .posters {
   --grid-gap: var(--base-rhythm);
@@ -41,11 +32,9 @@
   overflow: hidden;
 }
 
-.posters__info-card-inner {
+.posters__info-card {
   width: 100%;
   height: 100%;
-  display: grid;
-  place-items: center;
   padding: var(--base-rhythm);
   text-align: center;
   font-weight: 700;

@@ -1,0 +1,55 @@
+/* Poster Page */
+
+html.poster {
+  /* 
+    Note: -webkit-fill-available definitions is required to "fix" 100vh 
+    in mobile Safari and could be removed if the "dvh" unit was available!
+  */
+  height: -webkit-fill-available;
+}
+
+.poster body {
+  --poster-vertical-gap: var(--space-2xl);
+
+  height: 100vh;
+  height: -webkit-fill-available;
+  overflow: hidden;
+}
+
+.poster-nav,
+.poster-footer {
+  position: absolute;
+  width: 100%;
+  padding: 0 var(--base-rhythm);
+  line-height: var(--leading-flat);
+}
+
+.poster-nav {
+  inset: var(--base-rhythm) auto auto 0;
+}
+
+.poster-nav__all-posters-link {
+  font-weight: 700;
+}
+
+.poster-image {
+  position: absolute;
+  inset: 50%;
+  transform: translate(-50%, -50%);
+  height: calc(100vmin - calc(var(--poster-vertical-gap) * 2));
+  border-radius: var(--border-radius);
+  border: 1px solid var(--green-light);
+}
+
+.poster-footer {
+  inset: auto auto var(--base-rhythm) 0;
+}
+
+.poster-footer__stem {
+  height: var(--space-l);
+}
+
+.poster-footer__twitter-share {
+  width: var(--space-m);
+  display: flex;
+}

@@ -7,10 +7,10 @@ pageCSS: ['home.css']
 layout: layouts/base.njk
 ---
 
-<img class="background-splodges" src="/background-splodges.svg" alt=""/>
+<img class="splodges" src="/background-splodges.svg" alt=""/>
 
 <div class="home-header__flower">
-  {% svg "./src/images/illustrations/flower.svg", "spinning-flower", "aria-hidden='true'" %}
+  {% svg "./src/images/illustrations/flower.svg", "flower", "aria-hidden='true'" %}
 </div>
 
 <header class="home-header center-xy">
@@ -30,11 +30,9 @@ layout: layouts/base.njk
 </header>
 
 <main>
-  <ul title="Daily poster generations" class="posters auto-grid">
-    <li class="posters__info-card">
-      <div class="posters__info-card-inner">
-        <p>Next Poster Generation — {{ site.tomorrowsDateText }}</p>
-      </div>
+  <ul aria-label="Daily poster generations" class="posters auto-grid">
+    <li class="posters__info-card center-xy">
+      <p>Next Poster Generation — {{ site.tomorrowsDateText }}</p>
     </li>
     {% for poster in posters %}
       <li class="posters__generation">
