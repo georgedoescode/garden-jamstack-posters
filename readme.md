@@ -49,6 +49,6 @@ To create a production-style build of the site, use the following command:
 
 The above command will build the site to `dist/` (just like development mode) and spin up a Puppeteer instance to generate the open graph images for each poster.
 
-## Got an idea? Notice a weird bug?
+## Got an idea? Notice an issue?
 
 I'd love to hear from you! You can always log an issue on this repo's [Github issues page](https://github.com/georgedoescode/garden-jamstack-posters/issues) or [send me a message on Twitter](https://twitter.com/georgedoescode).
