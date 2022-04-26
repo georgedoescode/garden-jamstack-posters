@@ -1,40 +1,67 @@
 const CleanCSS = require('clean-css');
-const { minify } = require('terser');
+const { optimize } = require('svgo');
+const fs = require('fs');
 
 require('dotenv').config();
 
+function svgShortcode(path, classNames, attributes) {
+  const svgData = fs.readFileSync(path).toString();
+
+  const plugins = [];
+
+  if (classNames) {
+    classNames = classNames.split(' ');
+
+    plugins.push({
+      name: 'addClassesToSVGElement',
+      params: {
+        classNames,
+      },
+    });
+  }
+
+  if (attributes) {
+    attributes = attributes.split(' ');
+
+    plugins.push({
+      name: 'addAttributesToSVGElement',
+      params: {
+        attributes,
+      },
+    });
+  }
+
+  const result = optimize(svgData, {
+    plugins,
+  }).data;
+
+  return result;
+}
+
 module.exports = function (eleventyConfig) {
-  eleventyConfig.addPassthroughCopy('./src/fonts');
+  eleventyConfig.addPassthroughCopy({
+    './src/fonts/dm-sans-css': '/fonts/dm-sans',
+  });
 
   eleventyConfig.addPassthroughCopy({
-    './src/img/og-image.png': 'og-image.png',
+    './src/images/social/og-image.png': 'og-image.png',
   });
 
-  eleventyConfig.addPassthroughCopy({ './src/img/favicon.ico': 'favicon.ico' });
   eleventyConfig.addPassthroughCopy({
-    './src/img/favicon-16x16.png': 'favicon-16x16.png',
-  });
-  eleventyConfig.addPassthroughCopy({
-    './src/img/favicon-32x32.png': 'favicon-32x32.png',
+    './src/images/favicons': '/',
   });
 
-  eleventyConfig.addFilter('cssmin', function (code) {
-    return new CleanCSS({}).minify(code).styles;
-  });
+  eleventyConfig.addWatchTarget('./src/css');
 
-  eleventyConfig.addNunjucksAsyncFilter(
-    'jsmin',
-    async function (code, callback) {
-      try {
-        const minified = await minify(code);
-        callback(null, minified.code);
-      } catch (err) {
-        console.error('Terser error: ', err);
-        // Fail gracefully.
-        callback(null, code);
-      }
+  eleventyConfig.addNunjucksShortcode('svg', svgShortcode);
+
+  eleventyConfig.addTransform('cssmin', function (content, outputPath) {
+    if (outputPath && outputPath.endsWith('.css')) {
+      return new CleanCSS({}).minify(content).styles;
     }
-  );
+
+    return content;
+  });
 
   return {
     dir: {

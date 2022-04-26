@@ -1,0 +1,53 @@
+---
+eleventyComputed:
+  title: "{{ date }}"
+  socialImage: "{{ site.url }}/og-images/{{ date }}.png"
+metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
+pageClass: "poster"
+layout: layouts/base.njk
+pagination:
+  data: dates
+  size: 1
+  alias: date
+permalink: "generations/{{ date }}/index.html"
+---
+
+{# Note: Potential SEO issue - These pages are not very content rich and might not do wonders for SEO!  #}
+
+{# Splodges #}
+<img class="splodges" src="/background-splodges.svg" alt="" />
+
+{# Navigation #}
+<nav class="poster-nav repel">
+  <a class="poster-nav__all-posters-link" href="/">All posters</a>
+  {% svg "./src/images/illustrations/flower.svg", "poster-nav__flower flower", "aria-hidden='true'" %}
+</nav>
+
+{# Poster #}
+<main tabindex="-1">
+  <picture>
+    <source 
+      srcset="/generations/{{ date }}/poster-dark.svg" 
+      media="(prefers-color-scheme: dark)"
+    >
+    <img 
+      class="poster-image"
+      src="/generations/{{ date }}/poster-light.svg" 
+      alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
+      loading="lazy"
+    />
+  </picture>
+</main>
+
+{# Footer #}
+<footer class="poster-footer repel">
+  {% svg "./src/images/illustrations/stem.svg", "poster-footer__stem", "aria-hidden='true'" %}
+  <a 
+    aria-label="Share poster on Twitter"
+    class="poster-footer__twitter-share" 
+    href="http://twitter.com/share?url={{ site.url }}/generations/{{ date }}/" 
+    target="_blank" 
+  >
+    {% svg "./src/images/icons/twitter-icon.svg", "", "aria-hidden='true'" %}
+  </a>
+</footer>

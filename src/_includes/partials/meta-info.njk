@@ -1,0 +1,32 @@
+{# Note: As this project is designed as a fun sharing experiment it is important to have all the meta tags! #}
+
+{% set siteName = site.name %}
+{% set currentUrl = site.url + page.url %}
+
+{# Note: on a larger project, it might be worth allowing folks to override the title per-page #}
+{% set pageTitle = title + ' — ' + siteName %}
+
+{# Prevent title duplication on the homepage where the page/site title is the same #}
+{% if site.name === title %}
+  {% set pageTitle = title %}
+{% endif %}
+
+<title>{{ pageTitle }}</title>
+<link rel="canonical" href="{{ currentUrl }}"/>
+
+<meta property="og:site_name" content="{{ siteName }}"/>
+<meta property="og:title" content="{{ pageTitle }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="{{ currentUrl }}"/>
+
+{# Note: on a larger project, it would be worth adding some checks if socialImage is defined #}
+<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:image" content="{{ socialImage }}"/>
+<meta name="twitter:image" content="{{ socialImage }}"/>
+<meta property="og:image:alt" content="Page image for {{ pageTitle }}"/>
+<meta name="twitter:image:alt" content="Page image for {{ pageTitle }}"/>
+
+{# Note: on a larger project, it would be worth adding some checks if metaDesc is defined #}
+<meta name="description" content="{{ metaDesc }}"/>
+<meta name="twitter:description" content="{{ metaDesc }}"/>
+<meta property="og:description" content="{{ metaDesc }}"/>

@@ -1,0 +1,62 @@
+.home-header {
+  --stack-space: var(--space-xl);
+
+  margin: var(--space-4xl) 0;
+}
+
+.home-header__title {
+  max-width: 16ch;
+  text-indent: -0.4em;
+}
+
+.home-header__repo-link {
+  /* Ensure top margin applies in "stack" utility */
+  display: inline-block;
+}
+
+.home-flower {
+  position: absolute;
+  inset: var(--base-rhythm) var(--base-rhythm) auto auto;
+}
+
+.posters {
+  --grid-gap: var(--base-rhythm);
+  --grid-min-item-size: 16rem;
+  --grid-min-columns: 2;
+}
+
+.posters__generation a {
+  display: block;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--green-light);
+  color: var(--color-text);
+  overflow: hidden;
+}
+
+.posters__generation a img {
+  width: 100%;
+  height: 100%;
+}
+
+.posters__info-card {
+  width: 100%;
+  height: 100%;
+  padding: var(--base-rhythm);
+  text-align: center;
+  font-weight: 700;
+}
+
+.home-footer {
+  padding: var(--space-2xl) 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .posters__generation a {
+    transition: transform 150ms ease-in-out;
+  }
+
+  .posters__generation a:where(:hover, :focus) {
+    transform: scale(1.0125);
+  }
+}

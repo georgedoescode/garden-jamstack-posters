@@ -1,0 +1,31 @@
+.auto-grid {
+  --auto-grid-gap: var(--space-m);
+  --auto-grid-min-item-size: 8rem;
+  --auto-grid-min-columns: 1;
+
+  display: grid;
+  grid-gap: var(--grid-gap);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(
+      min(
+        100% / var(--grid-min-columns) - var(--grid-gap),
+        var(--grid-min-item-size)
+      ),
+      1fr
+    )
+  );
+}
+
+.repel {
+  --repel-vertical-alignment: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: var(--repel-vertical-alignment);
+}
+
+.stack > * + * {
+  margin-top: var(--stack-space, var(--base-rhythm));
+}

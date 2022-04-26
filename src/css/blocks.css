@@ -1,0 +1,29 @@
+.flower {
+  width: var(--space-l);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .flower {
+    will-change: transform;
+    animation: rotate 24s linear infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(359deg);
+    }
+  }
+}
+
+.splodges {
+  position: absolute;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+}

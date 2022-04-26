@@ -20,12 +20,14 @@ class BackgroundSplodges {
 
     const svg = SVG(document.documentElement).viewbox(0, 0, width, height);
 
+    const colors = Object.values(data.tokens.colors);
+
     for (let i = 0; i < 24; i++) {
       svg
         .circle(random(1, 8))
         .cx(random(0, width))
         .cy(random(0, height))
-        .fill(random(['#132A21', '#479575', '#E2505E', '#EEAFB8', '#F7A546']));
+        .fill(random(colors));
     }
 
     return svg.node.outerHTML;
