@@ -1,25 +1,26 @@
 const { createSVGWindow } = require('svgdom');
 const { SVG, registerWindow } = require('@svgdotjs/svg.js');
-const {
-  random,
-  randomBias,
-  seedPRNG,
-} = require('@georgedoescode/generative-utils');
-const { Vector2D } = require('@georgedoescode/vector2d');
-const { optimize } = require('svgo');
+const { random, seedPRNG } = require('@georgedoescode/generative-utils');
 
-const roundToDecimal = require('../utils/roundToDecimal');
-const createColorPicker = require('./createColorPicker');
-const createFlower = require('./createFlower');
-const createSun = require('./createSun');
-const createStem = require('./createStem');
-const createGrid = require('./createGrid');
+const createColorPicker = require('./utils/createColorPicker');
+const embedSVGFont = require('./utils/embedSVGFont');
+const findFurthestGridCell = require('./utils/findFurthestGridCell');
+const renderPosterGridCell = require('./render/renderPosterGridCell');
+const renderPosterColors = require('./render/renderPosterColors');
+const renderPosterText = require('./render/renderPosterText');
+const createSun = require('./graphics/createSun');
+const createGrid = require('./utils/createGrid');
+const getOptimisedSVGString = require('./utils/getOptimisedSVGString');
 
 const dmSansEncoded = require('../../fonts/dm-sans-encoded');
 
 const BASE_SEED = 'Like a circle round the sun';
 
 function generatePoster(seed, colorTokens, theme) {
+  // Seed all random functions from generative-utils using the base seed + poster date
+  seedPRNG(BASE_SEED + seed);
+
+  // Viewbox width and height
   const width = 768;
   const height = 1024;
 
@@ -30,190 +31,136 @@ function generatePoster(seed, colorTokens, theme) {
 
   const svg = SVG(document.documentElement).viewbox(0, 0, width, height);
 
-  const background = theme === 'dark' ? colorTokens.greenDark : '#fff';
+  // Embed a base64 encoded version of DM Sans
+  embedSVGFont(dmSansEncoded, svg);
 
-  svg.node.innerHTML += `
-    <defs>
-        <style>
-          ${dmSansEncoded}
-        </style>
-    </defs>
-  `;
-
-  const colors = [
-    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
-    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
-    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
-    theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark,
-    colorTokens.greenBase,
-    colorTokens.redBase,
-    colorTokens.pinkBase,
-    colorTokens.yellowBase,
-  ];
-
-  const colorPicker = createColorPicker(colors);
-
-  const textColor =
+  // Define the poster background color
+  const backgroundColor = theme === 'dark' ? colorTokens.greenDark : '#fff';
+  // Define the poster primary color (used for the majority of graphics and text)
+  const primaryColor =
     theme === 'dark' ? colorTokens.greenLight : colorTokens.greenDark;
 
+  // Color object store
+  const colors = {
+    background: backgroundColor,
+    primary: primaryColor,
+    palette: [
+      colorTokens.greenBase,
+      colorTokens.redBase,
+      colorTokens.pinkBase,
+      colorTokens.yellowBase,
+    ],
+  };
+
+  // We want out color palette to be weighted, featuring more of our neutral primary color
+  for (let i = 0; i < 4; i++) {
+    colors.palette.unshift(primaryColor);
+  }
+
+  // Exposes a random() and getStore() function, getStore will return all picked colors
+  const colorPicker = createColorPicker(colors.palette);
+
+  // Poster config options
   const cellFillChance = 0.125;
   const bottomPadding = 128 + 24;
   const gridPadding = 64;
 
-  seedPRNG(BASE_SEED + seed);
+  // Render the poster background
+  svg.rect(width, height).fill(colors.background);
 
-  svg.rect(width, height).fill(background);
-
+  // Create a random quadtree grid
   const { areas } = createGrid(width, height - bottomPadding, gridPadding);
 
-  let lastChoice;
+  // Track the last chosen cell so that we can use it to help determine the next one
+  let previousCellChoice;
 
-  if (random(0, 1) > 0.5) {
+  // Should we render a sun in this poster?
+  const renderSun = random(0, 1) > 0.5;
+
+  // Render the sun!
+  if (renderSun) {
+    // Find the largest grid area to plop the sun in
     const largestArea = [...areas].sort(
       (a, b) => b.width * b.height - a.width * a.height
     )[0];
 
+    // Add the sun to the largest grid area
     createSun(
       svg,
       largestArea.x + largestArea.width / 2,
       largestArea.y + largestArea.height / 2,
       Math.min(largestArea.width, largestArea.height),
       colorPicker,
-      background
+      colors.background
     );
 
-    largestArea.taken = true;
-
-    lastChoice = largestArea;
+    // Update previousCellChoice
+    previousCellChoice = largestArea;
+    previousCellChoice.taken = true;
   }
 
-  svg
-    .text(`“Garden” — ${seed.split('-').join('/')}`)
-    .font({
-      size: 24,
-      family: 'DM Sans',
-      weight: 700,
-      leading: 1,
-      fill: textColor,
-    })
-    .x(gridPadding)
-    .y(height - gridPadding - 29);
-
-  let lastOption = '';
+  /* 
+    Track the last object (stem, flower, circle) we rendered so that we don't repeat any,
+    this helps form a more balanced composition.
+  */
+  let lastRenderOption = '';
 
   for (let i = 0; i < areas.length; i++) {
+    // Sometimes, render nothing
     if (random(0, 1) < cellFillChance) continue;
 
-    const options = areas.filter((a) => !a.taken);
+    // Get all cells that don't have an object in them
+    const cellOptions = areas.filter((a) => !a.taken);
 
-    if (!options.length) break;
+    // If there are no remaining cells, exit out of the render loop
+    if (!cellOptions.length) break;
 
-    if (!lastChoice) {
-      lastChoice = random(options);
+    // This is the first cell to render (we haven't drawn a sun in this poster)
+    if (!previousCellChoice) {
+      previousCellChoice = random(cellOptions);
     }
 
-    const optionsSortedByDist = [...options].sort(
-      (a, b) =>
-        Vector2D.dist(
-          new Vector2D(
-            lastChoice.x + lastChoice.width / 2,
-            lastChoice.y + lastChoice.height / 2
-          ),
-          new Vector2D(a.x + a.width / 2, a.y + a.height / 2)
-        ) -
-        Vector2D.dist(
-          new Vector2D(
-            lastChoice.x + lastChoice.width / 2,
-            lastChoice.y + lastChoice.height / 2
-          ),
-          new Vector2D(b.x + b.width / 2, b.y + b.height / 2)
-        )
-    );
-
+    // Choose a random render option, but not the same as the last one
     const renderOptions = ['circle', 'stem', 'flower'].filter(
-      (o) => o !== lastOption
+      (o) => o !== lastRenderOption
     );
+
     const renderChoice = random(renderOptions);
+    lastRenderOption = renderChoice;
 
-    lastOption = renderChoice;
-
-    const cell = optionsSortedByDist[optionsSortedByDist.length - 1];
+    /* 
+      For each new cell, find the cell that is furthest from the previous choice,
+      this helps create a more balanced composition
+    */
+    const cell = findFurthestGridCell(previousCellChoice, cellOptions);
     cell.taken = true;
-    lastChoice = cell;
+    previousCellChoice = cell;
 
-    const cellCenter = {
-      x: cell.x + cell.width / 2,
-      y: cell.y + cell.height / 2,
-    };
-
-    const radius =
-      Math.min(cell.width, cell.height) /
-      roundToDecimal(randomBias(1, 4, 1, 1), 0.5);
-
-    switch (renderChoice) {
-      case 'flower':
-        createFlower(
-          svg,
-          cellCenter.x,
-          cellCenter.y,
-          radius,
-          colorPicker,
-          background
-        );
-        break;
-      case 'stem':
-        createStem(
-          svg,
-          cellCenter.x,
-          cell.y + cell.height,
-          cell.width,
-          cell.height,
-          colorPicker,
-          background
-        );
-        break;
-      default:
-        svg
-          .circle(radius)
-          .cx(cellCenter.x)
-          .cy(cellCenter.y)
-          .fill(colorPicker.random());
-
-        if (random(0, 1) > 0.5) {
-          svg
-            .circle(radius / 2)
-            .cx(cellCenter.x)
-            .cy(cellCenter.y)
-            .fill(background);
-        }
-        break;
-    }
+    // Render a flower, stem, or circle iin this grid cell
+    renderPosterGridCell(
+      svg,
+      cell,
+      renderChoice,
+      colorPicker,
+      colors.background
+    );
   }
 
-  const allColorsPresentInPoster = [...Array.from(colorPicker.getStore())];
+  // Render the poster title (Garden - Seed)
+  renderPosterText(svg, seed, colors.primary, height, gridPadding);
 
-  for (let i = 0; i < allColorsPresentInPoster.length; i++) {
-    svg
-      .circle(24)
-      .x(width - gridPadding - 24)
-      .y(height - gridPadding - 24)
-      .stroke({
-        width: 2,
-        color: background,
-      })
-      .fill(allColorsPresentInPoster[i])
-      .translate(-i * 16, 0);
-  }
+  // Render a little circle for each color present in the poster
+  renderPosterColors(
+    svg,
+    Array.from(colorPicker.getStore()),
+    colors.background,
+    width,
+    height,
+    gridPadding
+  );
 
-  svg.node.style.setProperty('-webkit-font-smoothing', 'antialiased');
-  svg.node.style.setProperty('-moz-osx-font-smoothing', 'grayscale');
-
-  const svgString = svg.node.outerHTML;
-
-  const result = optimize(svgString, {});
-  const optimizedSvgString = result.data;
-
-  return optimizedSvgString;
+  // Optimise the SVG element using SVGO and return it's outer HTML <svg>...</svg>
+  return getOptimisedSVGString(svg);
 }
 
 module.exports = { generatePoster };

@@ -1,5 +1,7 @@
 const now = new Intl.DateTimeFormat(new Date()).formatToParts();
 
+const posterCount = parseInt(process.env.POSTER_COUNT) || Infinity;
+
 const START_DATE = [2022, 2, 21, 0, 0];
 const CURRENT_DATE = [
   parseInt(now.find((v) => v.type === 'year').value),
@@ -39,5 +41,5 @@ module.exports = function () {
   return getDatesBetweenDates(
     new Date(...START_DATE),
     new Date(...CURRENT_DATE)
-  );
+  ).slice(0, posterCount);
 };

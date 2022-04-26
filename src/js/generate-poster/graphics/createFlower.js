@@ -1,5 +1,5 @@
 const { random, randomSnap } = require('@georgedoescode/generative-utils');
-const { Glob, Node } = require('../utils/glob');
+const { Glob, Node } = require('../../utils/glob');
 
 function createFlower(svg, x, y, size, colorPicker, background) {
   size /= 2;

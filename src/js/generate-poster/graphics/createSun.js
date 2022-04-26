@@ -1,5 +1,5 @@
 const { random } = require('@georgedoescode/generative-utils');
-const { Glob, Node } = require('../utils/glob');
+const { Glob, Node } = require('../../utils/glob');
 
 function createSun(svg, x, y, radius, colorPicker, background) {
   radius /= 2;

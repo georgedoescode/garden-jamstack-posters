@@ -42,17 +42,17 @@ layout: layouts/base.njk
     <li class="posters__info-card center-xy">
       <p>Next Poster Generation — {{ site.tomorrowsDateText }}</p>
     </li>
-    {% for poster in posters %}
+    {% for date in dates %}
       <li class="posters__generation">
-        <a href="/generations/{{ poster.seed }}/">
-          <div class="visually-hidden">Poster generated on {{ poster.seed }}</div>
+        <a href="/generations/{{ date }}/">
+          <div class="visually-hidden">Poster generated on {{ date}}</div>
           <picture>
             <source 
-              srcset="/generations/{{ poster.seed }}/poster-dark.svg" 
+              srcset="/generations/{{ date }}/poster-dark.svg" 
               media="(prefers-color-scheme: dark)"
             >
             <img 
-              src="/generations/{{ poster.seed }}/poster-light.svg" 
+              src="/generations/{{ date }}/poster-light.svg" 
               alt=""
               loading="lazy"
             />
