@@ -1,5 +1,7 @@
 .home-header {
-  margin: var(--space-3xl) 0;
+  --stack-space: var(--space-xl);
+
+  margin: var(--space-4xl) 0;
 }
 
 .home-header__title {

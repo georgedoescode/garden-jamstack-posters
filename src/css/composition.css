@@ -27,9 +27,8 @@
 }
 
 .stack {
-  --stack-space: var(--base-rhythm);
 }
 
 .stack > * + * {
-  margin-top: var(--stack-space, 1.5em);
+  margin-top: var(--stack-space, var(--base-rhythm));
 }

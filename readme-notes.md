@@ -25,7 +25,7 @@
 
 ### JS
 
-- I would like to add more documentation around the generative code, right now only the index file features in depth comments.
+- I would like to add more documentation and do more refactoring around the generative code, right now only the index file features in depth comments and the individual functions could do with a little tidy.
 - The generative poster code is split into three directories - graphics (code to generrate each individual object such as the sun and stem), render (functions that render directly to the SVG canvas), and utils(utility functions)
 
 ### Other
