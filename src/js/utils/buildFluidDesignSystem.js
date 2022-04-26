@@ -30,13 +30,37 @@ function clampBuilder(minWidthPx, maxWidthPx, minSizePx, maxSizePx) {
   const yAxisIntersection = -minWidth * slope + minSize;
 
   const min = `${round(minSize)}rem`;
-  const val = `calc(${round(yAxisIntersection)}rem + ${round(slope * 100)}vw)`;
+  const val = `${round(yAxisIntersection)}rem + ${round(slope * 100)}vw`;
   const max = `${round(maxSize)}rem`;
 
   return `clamp(${min}, ${val}, ${max})`;
 }
 
-function buildFluidSystem(opts) {
+function generateCSS(system) {
+  let css = '';
+
+  const { typeScale, spaceSteps, spacePairs, customPairs } = system;
+
+  for (const step of Object.keys(typeScale)) {
+    css += `--step-${step}: ${typeScale[step].clamp};`;
+  }
+
+  for (const step of Object.keys(spaceSteps)) {
+    css += `--space${step.toLowerCase()}: ${spaceSteps[step].clamp};`;
+  }
+
+  for (const step of Object.keys(spacePairs)) {
+    css += `--space${step.toLowerCase()}: ${spacePairs[step].clamp};`;
+  }
+
+  for (const step of Object.keys(customPairs)) {
+    css += `--space${step.toLowerCase()}: ${customPairs[step].clamp};`;
+  }
+
+  return css;
+}
+
+function buildFluidDesignSystem(opts) {
   const {
     minViewport,
     maxViewport,
@@ -125,31 +149,12 @@ function buildFluidSystem(opts) {
     };
   }
 
-  return system;
+  return {
+    ...system,
+    generateCSS() {
+      return generateCSS(system);
+    },
+  };
 }
 
-function generateCSS(system) {
-  let css = '';
-
-  const { typeScale, spaceSteps, spacePairs, customPairs } = system;
-
-  for (const step of Object.keys(typeScale)) {
-    css += `--step-${step}: ${typeScale[step].clamp};`;
-  }
-
-  for (const step of Object.keys(spaceSteps)) {
-    css += `--space${step.toLowerCase()}: ${spaceSteps[step].clamp};`;
-  }
-
-  for (const step of Object.keys(spacePairs)) {
-    css += `--space${step.toLowerCase()}: ${spacePairs[step].clamp};`;
-  }
-
-  for (const step of Object.keys(customPairs)) {
-    css += `--space${step.toLowerCase()}: ${customPairs[step].clamp};`;
-  }
-
-  return css;
-}
-
-module.exports = { buildFluidSystem, generateCSS };
+module.exports = { buildFluidDesignSystem };

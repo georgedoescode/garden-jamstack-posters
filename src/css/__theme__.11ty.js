@@ -1,7 +1,6 @@
 const {
-  buildFluidSystem,
-  generateCSS,
-} = require('../js/utils/buildFluidSystem');
+  buildFluidDesignSystem,
+} = require('../js/utils/buildFluidDesignSystem');
 
 /* 
   Note: Potential DX issue - Some congnitive overhead could be introduced by 
@@ -16,7 +15,7 @@ class CSSTheme {
   }
 
   render(data) {
-    const fluidTypeAndSpacingSystem = buildFluidSystem({
+    const fluidDesignSystem = buildFluidDesignSystem({
       minViewport: data.tokens.typography.minViewport,
       maxViewport: data.tokens.typography.maxViewport,
       typeScaleSteps: [-2, -1, 0, 1, 2, 3, 4, 5],
@@ -50,7 +49,7 @@ class CSSTheme {
     // Note: Potential DX issue - CSS syntax highlighting/linting is disabled here!
     return `
       :where(html) {
-        ${generateCSS(fluidTypeAndSpacingSystem)}
+        ${fluidDesignSystem.generateCSS()}
 
         --green-dark: ${data.tokens.colors.greenDark};
         --green-base: ${data.tokens.colors.greenBase};
@@ -58,6 +57,7 @@ class CSSTheme {
         --red-base: ${data.tokens.colors.redBase};
         --yellow-base: ${data.tokens.colors.yellowBase};
         --pink-base: ${data.tokens.colors.pinkBase};
+        --blue-base: ${data.tokens.colors.blueBase};
     
         --border-radius: 0.75rem;
       

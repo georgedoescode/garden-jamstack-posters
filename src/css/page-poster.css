@@ -23,6 +23,10 @@ html.poster body {
   line-height: var(--leading-flat);
 }
 
+:where(.poster-nav, .poster-footer) a {
+  color: var(--text-base);
+}
+
 .poster-nav {
   inset: var(--base-rhythm) auto auto 0;
 }
@@ -35,6 +39,7 @@ html.poster body {
   position: absolute;
   inset: 50%;
   transform: translate(-50%, -50%);
+  aspect-ratio: 3 / 4;
   height: calc(100vmin - calc(var(--poster-vertical-gap) * 2));
   border-radius: var(--border-radius);
   border: 1px solid var(--green-light);

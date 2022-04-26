@@ -1,22 +1,30 @@
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
 body {
   --base-rhythm: var(--space-m-l);
 
-  --body-background-color: #fff;
-  --text-color: var(--green-dark);
+  --color-body-background: #fff;
+  --color-text: var(--green-dark);
+  --color-text-accent: var(--blue-base);
 
   padding: 0 var(--base-rhythm);
-  background: var(--body-background-color);
+  background: var(--color-body-background);
   font-family: 'DM Sans', system-ui;
   font-size: var(--step-1);
-  color: var(--text-color);
+  color: var(--color-text);
   line-height: var(--leading-normal);
   text-rendering: optimizeSpeed;
 }
 
 a {
-  color: var(--text-color);
-  text-underline-offset: 0.5rem;
-  text-decoration-thickness: 0.1rem;
+  color: var(--color-text-accent);
+}
+
+:focus-visible {
+  outline: 2px dashed currentColor;
+  outline-offset: 0.25rem;
 }
 
 h1,
@@ -41,7 +49,14 @@ p {
 /* Note: It would be good to introduce a dark mode toggle to give folks the choice */
 @media (prefers-color-scheme: dark) {
   body {
-    --body-background-color: var(--green-dark);
-    --text-color: var(--green-light);
+    --color-body-background: var(--green-dark);
+    --color-text: var(--green-light);
+    --color-text-accent: var(--pink-base);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
   }
 }

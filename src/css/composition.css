@@ -26,9 +26,6 @@
   align-items: var(--repel-vertical-alignment);
 }
 
-.stack {
-}
-
 .stack > * + * {
   margin-top: var(--stack-space, var(--base-rhythm));
 }

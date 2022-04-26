@@ -7,29 +7,32 @@ require('dotenv').config();
 function svgShortcode(path, classNames, attributes) {
   const svgData = fs.readFileSync(path).toString();
 
+  const plugins = [];
+
   if (classNames) {
     classNames = classNames.split(' ');
+
+    plugins.push({
+      name: 'addClassesToSVGElement',
+      params: {
+        classNames,
+      },
+    });
   }
 
   if (attributes) {
     attributes = attributes.split(' ');
+
+    plugins.push({
+      name: 'addAttributesToSVGElement',
+      params: {
+        attributes,
+      },
+    });
   }
 
   const result = optimize(svgData, {
-    plugins: [
-      {
-        name: 'addClassesToSVGElement',
-        params: {
-          classNames,
-        },
-      },
-      {
-        name: 'addAttributesToSVGElement',
-        params: {
-          attributes,
-        },
-      },
-    ],
+    plugins,
   }).data;
 
   return result;
