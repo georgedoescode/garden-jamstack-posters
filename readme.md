@@ -7,7 +7,7 @@
 
 ## 🧱 Building blocks 
 
-- [Eleventy:](https://www.11ty.dev/) a static site generator that generates the site's `.html` and generative `.svg` poster files.
+- [Eleventy:](https://www.11ty.dev/) a static site generator that generates the site itself and the generative `.svg` poster files.
 - [Netlify:](https://www.netlify.com/) hosts the "Garden" website and runs the build process for each deployment.
 - [Puppeteer:](https://developers.google.com/web/tools/puppeteer) a Node library that can control Headless Chrome — used to create open graph images by capturing screenshots of poster pages at build time.
 - [esbuild:](https://esbuild.github.io/) an extremely fast bundler that concatenates and minifies the project's CSS.
