@@ -64,14 +64,14 @@ function getDirectories(srcPath) {
             display: none;
           }
 
-          .poster {
-            --shadow-color: hsla(0, 100%, 100%, 0.1);
+          .poster body {
+            color: var(--green-light);
+            height: 100vh;
+            background: var(--green-dark);
           }
 
-          .poster body {
-            color: #fff;
-            height: 100vh;
-            background: #091510;
+          .poster-image {
+            border: none;
           }
 
           .flower {

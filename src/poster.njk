@@ -1,7 +1,7 @@
 ---
 eleventyComputed:
   title: "{{ date }}"
-  socialImage: "{{ site.url }}/og-images/{{ date }}-light.png"
+  socialImage: "{{ site.url }}/og-images/{{ date }}.png"
 metaDesc: A peculiar little website that will create a generative poster design every day until the summer solstice.
 pageClass: "poster"
 layout: layouts/base.njk
@@ -24,15 +24,15 @@ permalink: "generations/{{ date }}/index.html"
 </nav>
 
 {# Poster #}
-<main tabindex="-1">
+<main>
   <picture>
     <source 
-      srcset="/generations/{{ date }}/poster-dark.svg" 
+      srcset="./poster-dark.svg" 
       media="(prefers-color-scheme: dark)"
     >
     <img 
       class="poster-image"
-      src="/generations/{{ date }}/poster-light.svg" 
+      src="./poster-light.svg" 
       alt="A collection of abstract, 2-dimensional flowers and plants arranged at random to form a poster design"
       loading="lazy"
     />
