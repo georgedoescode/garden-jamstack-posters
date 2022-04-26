@@ -1,5 +1,7 @@
 # Garden — Generative Jamstack Posters
 
+<img src="https://garden.georgefrancis.dev/og-image.png" alt="">
+
 "Garden" is an experiment in building creative, joyful online experiences using core web technologies.
 
 ## Building blocks
