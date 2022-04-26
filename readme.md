@@ -5,7 +5,7 @@
 "Garden" is an experiment in building creative, joyful online experiences using core web technologies.
 
 
-## Building blocks
+## 🧱 Building blocks 
 
 - [Eleventy:](https://www.11ty.dev/) a static site generator that generates the site's `.html` and generative `.svg` poster files.
 - [Netlify:](https://www.netlify.com/) hosts the "Garden" website and runs the build process for each deployment.
@@ -15,7 +15,7 @@
 - [SVG.js:](https://svgjs.dev/docs/3.0/) a lightweight JS library that enables terse SVG scripting — used to help generate the poster designs.
 
 
-## Local installation
+## ⚡️ Local installation
 
 Want to explore and run this project on your own machine? Here's how!
 
@@ -33,26 +33,24 @@ Then, navigate inside the repository and install the project's dependencies:
 
 ### Development mode
 
-To spin up a local development environment, run:
+To spin up a local development environment, run: `npm run watch`
 
-`npm run watch`
+This will start Eleventy in watch mode and spin up a local web server at `http://localhost:8081`.
 
-The above will start Eleventy in watch mode and spin up a local web server at `http://localhost:8081`.
-
-_**Note:** to speed up local builds, you can set a `POSTER_COUNT` environment variable before running the local development command:_
+_**Note:** to speed up local builds by only generating recent posters you can set a `POSTER_COUNT` environment variable like so:_
 
 `POSTER_COUNT=8 npm run watch`
 
 
-### Running a "production" build
+### Production mode
 
-To create a production-style build of the site, run:
+To create a production build of the site, run:
 
 `npm run build`
 
-The above command will build the site to `dist/` (just like development mode) and spin up a Puppeteer instance to generate the open graph images for each poster.
+This will build the site to `dist/` (just like development mode) and spin up a Puppeteer instance to generate the open graph images for each poster.
 
 
-## Got an idea? Notice an issue?
+## 💡 Got an idea? Notice an issue?
 
 I'd love to hear from you! You can always log an issue on this repo's [Github issues page](https://github.com/georgedoescode/garden-jamstack-posters/issues) or [send me a message on Twitter](https://twitter.com/georgedoescode).
