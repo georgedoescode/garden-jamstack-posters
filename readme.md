@@ -13,6 +13,7 @@
 - [esbuild:](https://esbuild.github.io/) an extremely fast bundler that concatenates and minifies the project's CSS.
 - [CUBE CSS:](https://cube.fyi/) a CSS methodology orientated towards simplicity, pragmatism and consistency — used to guide the project's CSS structure.
 - [SVG.js:](https://svgjs.dev/docs/3.0/) a lightweight JS library that enables terse SVG scripting — used to help generate the poster designs.
+- [IFTTT](https://ifttt.com/): a no code automation platform used with [Netlify build hooks](https://docs.netlify.com/configure-builds/build-hooks/) to automate daily deployments.
 
 
 ## ⚡️ Local installation
