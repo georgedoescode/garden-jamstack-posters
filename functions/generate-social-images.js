@@ -14,6 +14,7 @@ function getDirectories(srcPath) {
 
 (async () => {
   const basePageDir = '../dist/generations';
+
   const allPages = getDirectories(basePageDir).map((seed) => {
     return {
       seed,
