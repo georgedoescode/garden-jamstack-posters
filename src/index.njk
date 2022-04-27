@@ -45,7 +45,7 @@ layout: layouts/base.njk
     {% for date in dates %}
       <li class="posters__generation">
         <a href="/generations/{{ date }}/">
-          <div class="visually-hidden">Poster generated on {{ date}}</div>
+          <div class="visually-hidden">Poster generated on {{ date }}</div>
           <picture>
             <source 
               srcset="/generations/{{ date }}/poster-dark.svg" 
@@ -67,7 +67,11 @@ layout: layouts/base.njk
 <footer class="home-footer center-xy">
   <p>
     Made by 
-    <a href="https://twitter.com/georgedoescode" target="_blank">
+    <a 
+      title="Visit my personal site"
+      href="https://georgefrancis.dev/" 
+      target="_blank"
+    >
       George Francis
     </a>
   </p>
